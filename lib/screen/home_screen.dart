@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
 
+  var getUser = FirebaseAuthService.firebaseUserDetail();
+
   @override
   Widget build(BuildContext context) {
-
-    var getUser = FirebaseAuthService.firebaseUserDetail();
 
     return Scaffold(
       appBar: AppBar(
@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text(getUser),
+        child: Text(getUser.email.toString()),
       ),
     );
   }
