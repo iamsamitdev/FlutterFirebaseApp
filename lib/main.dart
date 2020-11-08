@@ -1,71 +1,47 @@
-import 'package:firebaseApp/counterProvider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebaseApp/res/color.dart';
+import 'package:firebaseApp/route/routes.dart';
+import 'package:firebaseApp/screen/home_screen.dart';
+import 'package:firebaseApp/screen/login_screen.dart';
+import 'package:firebaseApp/service/firebase/firebase_auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<CounterProvider>(
-          create: (_) => CounterProvider(),
-        ),
-      ],
-      child:  MyApp(),
+Future<void> main() async {
+  // กำหนดให้รองรับการอ่าน api ผ่าน https
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  // กำหนดให้แสดงผลเฉพาะแนวตั้ง
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: colorPrimaryDark,
+      systemNavigationBarColor: colorPrimaryDark
     )
+  );
+  runApp(
+    StreamProvider(
+      create: (BuildContext context) => FirebaseAuthService.firebaseListner,
+      child: MaterialApp(
+        theme: ThemeData(
+          primaryColorDark: colorPrimaryDark,
+          accentColor: colorPrimaryDark,
+          primaryColor: colorPrimary
+        ),
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: Routes.generateRoute,
+        home: MyApp(),
+      ),
+    )
+
   );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-
-    var _counter =  Provider.of<CounterProvider>(context, listen: false);
-
-    print("build.. build(BuildContext)");
-    print("build.. Scaffold");
-    print("build.. AppBar");
-    print("build.. Center");
-    print("build.. Column");
-    print("build.. Text");
-    print("build.. FloatingActionButton");
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Provider Manage'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('You have pushed the button this many times'),
-            Consumer<CounterProvider>(
-              builder: (_, value, __) => Text(
-                '${_counter.value}',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            )
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _counter.increment(),
-        child: Icon(Icons.add),
-      ),
-    );
+    return Provider.of<User>(context) == null ? LoginScreen() : HomeScreen();
   }
 }

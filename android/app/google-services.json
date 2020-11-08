@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1039680820220",
+    "firebase_url": "https://flutter-firebase-samit.firebaseio.com",
+    "project_id": "flutter-firebase-samit",
+    "storage_bucket": "flutter-firebase-samit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039680820220:android:76d761cd873860c03f9879",
+        "android_client_info": {
+          "package_name": "com.itgenius.firebaseApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039680820220-q4eql4ou94fbd36bkbclmfb9boa8n5k5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZojQsc-RvwVuo_HkbxouHFvoPp9WjYfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039680820220-q4eql4ou94fbd36bkbclmfb9boa8n5k5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
