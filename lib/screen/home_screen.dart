@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
 
-  var getUser = FirebaseAuthService.firebaseUserDetail();
+  String userEmail = FirebaseAuthService.firebaseUserDetail();
+  
+  // var getUser = FirebaseAuthService.firebaseUserDetail();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text(getUser.email.toString()),
+        child: Text('${userEmail ?? "..."}'),
       ),
     );
   }

@@ -35,7 +35,8 @@ class FirebaseAuthService {
 
   // สร้างฟังก์ชันสำหรับการดึงข้อมูล User ออกมาใช้
   static firebaseUserDetail() {
-   return _firebaseAuth.currentUser;
+    final User user = _firebaseAuth.currentUser;
+    return user.email;
   }
 
   // สร้างฟังก์ชันสำหรับการ logout
