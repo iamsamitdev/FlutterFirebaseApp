@@ -2,6 +2,7 @@ import 'package:firebaseApp/res/style.dart';
 import 'package:firebaseApp/service/firebase/firebase_auth_service.dart';
 import 'package:firebaseApp/widget/button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
 
@@ -9,15 +10,86 @@ class LoginScreen extends StatelessWidget {
   String _email;
   String _password;
 
+  Widget buildOtherLine() {
+    return Container(
+        margin: EdgeInsets.only(top: 10),
+        child: Row(
+          children: <Widget>[
+          Expanded(child: Divider(color: Colors.green[800])),
+          Padding(
+              padding: EdgeInsets.all(6),
+              child: Text("หรือ",
+                  style: TextStyle(fontSize: 20.0, color: Colors.black87, fontWeight: FontWeight.bold),                  
+                )
+              ),
+          Expanded(child: Divider(color: Colors.green[800])),
+        ]
+      )
+    );
+  }
+
+  Widget buildButtonPhone(BuildContext context) {
+    return InkWell(
+      child: Container(
+        constraints: BoxConstraints.expand(height: 50),
+        child: Text("เข้าระบบด้วยเบอร์โทรศัพท์",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 18, color: Colors.white)),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.pink
+        ),
+        margin: EdgeInsets.only(top: 12),
+        padding: EdgeInsets.all(12)),
+        onTap: (){
+          Navigator.pushNamed(context, '/phoneLogin');
+        }
+    );
+  }
+
+  Widget buildButtonGoogle(BuildContext context) {
+    return InkWell(
+      child: Container(
+        constraints: BoxConstraints.expand(height: 50),
+        child: Text("เข้าระบบด้วย Google",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 18, color: Colors.white)),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: Colors.red
+        ),
+        margin: EdgeInsets.only(top: 12),
+        padding: EdgeInsets.all(12)),
+        onTap: () {}
+    );
+  }
+
+  Widget buildButtonFacebook(BuildContext context) {
+    return InkWell(
+      child: Container(
+        constraints: BoxConstraints.expand(height: 50),
+        child: Text("เข้าสู่ระบบด้วย Facebook",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 18, color: Colors.white)),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.blue
+        ),
+        margin: EdgeInsets.only(top: 12),
+        padding: EdgeInsets.all(12)
+        ),
+        onTap: (){}
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('เข้าสู่ระบบ', style: GoogleFonts.kanit(),),
       ),
       body: SingleChildScrollView(
           child: Padding(
-          padding: const EdgeInsets.only(top:40.0, left:16.0, right: 16.0),
+          padding: const EdgeInsets.only(top:20.0, left:16.0, right: 16.0),
           child: Container(
             child: Form(
               key: _formKey,
@@ -28,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                     width: 80.0,
                     height: 80.0,
                   ),
-                  SizedBox(height: 50,),
+                  SizedBox(height: 20,),
                   TextFormField(
                     decoration: styleInputDecoration.copyWith(labelText: 'Email'),
                     keyboardType: TextInputType.emailAddress,
@@ -49,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20,),
                   ButtonWidget(
-                    buttonText: 'LOGIN', 
+                    buttonText: 'เข้าสู่ระบบ', 
                     onClick: (){
                       print(_email);
                       if(_formKey.currentState.validate()){
@@ -58,15 +130,21 @@ class LoginScreen extends StatelessWidget {
                       }
                     }
                   ),
+                  SizedBox(height: 10,),
+                  buildOtherLine(),
+                  SizedBox(height: 10,),
+                  buildButtonPhone(context),
+                  buildButtonGoogle(context),
+                  buildButtonFacebook(context),
                   SizedBox(height: 20,),
                   InkWell(
                     child: RichText(
                       text: TextSpan(
-                        text: "Don't have account?",
+                        text: "ยังไม่ได้สมัครสมาชิก ?",
                         style: styleSmallText,
                         children: [
                           TextSpan(
-                            text: ' Create New Account.',
+                            text: ' สมัครสมาชิกใหม่ด้วยอีเมล์.',
                             style: styleSmallText.copyWith(
                               color: Theme.of(context).primaryColorDark,
                             ),
@@ -77,7 +155,8 @@ class LoginScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pushReplacementNamed(context, '/register');
                     },
-                  )
+                  ),
+                  SizedBox(height: 20,),
                 ],
               )
             ),

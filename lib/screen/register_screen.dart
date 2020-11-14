@@ -2,6 +2,7 @@ import 'package:firebaseApp/res/style.dart';
 import 'package:firebaseApp/service/firebase/firebase_auth_service.dart';
 import 'package:firebaseApp/widget/button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RegisterScreen extends StatelessWidget {
 
@@ -14,7 +15,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text('สมัครสมาชิก',style: GoogleFonts.kanit(),),
       ),
       body: SingleChildScrollView(
           child: Padding(
@@ -60,7 +61,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20,),
                   ButtonWidget(
-                    buttonText: 'REGISTER', 
+                    buttonText: 'สมัครสมาชิก', 
                     onClick: (){
                       print(_email);
                       if(_formKey.currentState.validate()){
@@ -73,11 +74,11 @@ class RegisterScreen extends StatelessWidget {
                   InkWell(
                     child: RichText(
                       text: TextSpan(
-                        text: "If your have an account?",
+                        text: "ถ้าเป็นสมาชิกอยู่แล้ว ?",
                         style: styleSmallText,
                         children: [
                           TextSpan(
-                            text: ' Back to login page.',
+                            text: ' กลับหน้าล็อกอิน.',
                             style: styleSmallText.copyWith(
                               color: Theme.of(context).primaryColorDark,
                             ),
