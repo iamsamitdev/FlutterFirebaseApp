@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PhoneLoginScreen extends StatelessWidget {
-
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   TextEditingController phoneController = TextEditingController();
@@ -12,12 +11,11 @@ class PhoneLoginScreen extends StatelessWidget {
     return InkWell(
         child: Container(
             constraints: BoxConstraints.expand(height: 50),
-            child: Text("Sign in with Phone",
+            child: Text("เข้าสู่ระบบ",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18, color: Colors.white)),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.green[200]),
+                borderRadius: BorderRadius.circular(10), color: Colors.pink),
             margin: EdgeInsets.only(top: 16),
             padding: EdgeInsets.all(12)),
         onTap: () {});
@@ -45,7 +43,7 @@ class PhoneLoginScreen extends StatelessWidget {
         margin: EdgeInsets.only(left: 8),
         constraints: BoxConstraints.expand(height: 50),
         decoration: BoxDecoration(
-            color: Colors.yellow[50], borderRadius: BorderRadius.circular(16)),
+            color: Colors.yellow[100], borderRadius: BorderRadius.circular(10)),
         child: TextField(
             controller: phoneController,
             decoration: InputDecoration.collapsed(hintText: "xx-xxx-xxxx"),
@@ -71,8 +69,33 @@ class PhoneLoginScreen extends StatelessWidget {
     return Scaffold(
       // key: scaffoldKey,
       appBar: AppBar(
-        title: Text('เข้าสู่ระบบด้วยเบอร์โทรศัพท์',style: GoogleFonts.kanit(),),
+        title: Text(
+          'เข้าสู่ระบบด้วยเบอร์โทรศัพท์',
+          style: GoogleFonts.kanit(),
+        ),
       ),
+      body: SingleChildScrollView(
+          child: Container(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.green[100]),
+                    child: Text("+66",
+                        style: TextStyle(fontSize: 18, color: Colors.black54))),
+               
+              ],
+            ),
+
+            // buildTextFieldSmsVerification(),
+            buildButtonVerify(),
+          ],
+        ),
+      )),
       // body: SingleChildScrollView(
       //   child: Padding(
       //     padding: const EdgeInsets.only(top: 40.0, left: 16.0, right: 16.0),
