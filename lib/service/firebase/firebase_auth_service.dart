@@ -1,4 +1,3 @@
-import 'package:firebaseApp/screen/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,11 +7,47 @@ class FirebaseAuthService {
   static FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   static Stream<User> firebaseListner = _firebaseAuth.authStateChanges();
 
-  // สร้างฟังก์ชันสำหรับการ login
+  static void testSendSMS() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: '+66888888888',
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (String verificationId, int resendToken) {},
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
+
+  // สร้างฟังก์ชันสำหรับการขอ SMS OTP
+  static void requestVerifyCode(String phoneNumber, String verificationId) async {
+    try{
+      await _firebaseAuth.verifyPhoneNumber(
+        phoneNumber: "+66"+ phoneNumber, 
+        timeout: Duration(seconds: 10),
+        verificationCompleted: (User){
+          // 
+        }, 
+        verificationFailed:(error){
+          print('Phone number verification failed');
+        }, 
+        codeSent: (verificationId,[forceResendingToken]){
+          verificationId = verificationId;
+          print(verificationId);
+        }, 
+        codeAutoRetrievalTimeout: (verificationId){
+          // 
+        }
+      );
+    }on FirebaseAuthException catch (e) {
+      print(e.code);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  // สร้างฟังก์ชันสำหรับการ login ด้วย Email
   static void firebaseSignIn(String email, String password) async {
     try {
-      UserCredential userCredential = await _firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
       print(userCredential.user.email);
       print(userCredential.user);
     } on FirebaseAuthException catch (e) {
@@ -60,7 +95,7 @@ class FirebaseAuthService {
     try {
       final _authResult = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      // print(_authResult);
+      print(_authResult);
       // Navigator.pushReplacementNamed(context, '/login');
       // Navigator.of(context).pushReplacementNamed('/login');
       // Navigator.push(
