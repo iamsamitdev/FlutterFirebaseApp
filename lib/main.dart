@@ -7,6 +7,7 @@ import 'package:firebaseApp/service/firebase/firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -26,6 +27,7 @@ Future<void> main() async {
       create: (BuildContext context) => FirebaseAuthService.firebaseListner,
       child: MaterialApp(
         theme: ThemeData(
+          textTheme: GoogleFonts.kanitTextTheme(),
           primaryColorDark: colorPrimaryDark,
           accentColor: colorPrimaryDark,
           primaryColor: colorPrimary

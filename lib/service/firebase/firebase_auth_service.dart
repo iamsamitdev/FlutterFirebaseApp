@@ -1,9 +1,10 @@
+import 'package:firebaseApp/screen/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class FirebaseAuthService {
+
   static FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   static Stream<User> firebaseListner = _firebaseAuth.authStateChanges();
 
@@ -27,7 +28,7 @@ class FirebaseAuthService {
             fontSize: 16.0);
       } else if (e.code == 'user-not-found') {
         print('No user found for that email.');
-         Fluttertoast.showToast(
+        Fluttertoast.showToast(
             msg: 'No user found for that email.',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
@@ -54,16 +55,24 @@ class FirebaseAuthService {
   }
 
   // สร้างฟังก์ชันสำหรับการ regsiter
-  static void firebaseRegister(String email, String password) async {
+  static firebaseRegister(String email, String password) async {
+    // BuildContext context;
     try {
       final _authResult = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      print(_authResult);
+      // print(_authResult);
+      // Navigator.pushReplacementNamed(context, '/login');
+      // Navigator.of(context).pushReplacementNamed('/login');
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => LoginScreen()),
+      // );
+      return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
         Fluttertoast.showToast(
-            msg: 'The password provided is too weak',
+            msg: 'รหัสผ่านสั้นเกินไป ต้องยาวไม่น้อยกว่า 6 ตัวอักษร',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -73,7 +82,7 @@ class FirebaseAuthService {
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
         Fluttertoast.showToast(
-            msg: 'The account already exists for that email.',
+            msg: 'มีอีเมล์นี้แล้วในระบบ กรุณาใช้อีเมล์อื่น',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -81,8 +90,10 @@ class FirebaseAuthService {
             textColor: Colors.white,
             fontSize: 16.0);
       }
+      return false;
     } catch (e) {
       print(e);
+      return false;
     }
   }
 
