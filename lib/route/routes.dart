@@ -14,13 +14,13 @@ class Routes {
       case routeLogin:
         return PageTransition(
           child: LoginScreen(), 
-          type: PageTransitionType.leftToRight
+          type: PageTransitionType.rightToLeft
         );
         break;
       case routeRegister:
         return PageTransition(
           child: RegisterScreen(), 
-          type: PageTransitionType.rightToLeft
+          type: PageTransitionType.leftToRight
         );
         break;
       case routeHome:
