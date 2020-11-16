@@ -1,5 +1,6 @@
 import 'package:firebaseApp/res/style.dart';
 import 'package:firebaseApp/service/firebase/firebase_auth_service.dart';
+import 'package:firebaseApp/widget/bottom_sheet_widget.dart';
 import 'package:firebaseApp/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -65,8 +66,7 @@ class RegisterScreen extends StatelessWidget {
                     onClick: (){
                       // print(_email);
                       if(_formKey.currentState.validate()){
-                        FirebaseAuthService.firebaseRegister(_email, _password);
-                        Navigator.pushReplacementNamed(context, '/login');
+                        FirebaseAuthService().firebaseRegister(context, _email, _password);
                       }
                     }
                   ),

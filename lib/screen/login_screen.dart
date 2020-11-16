@@ -89,7 +89,7 @@ class LoginScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: Padding(
-          padding: const EdgeInsets.only(top:40.0, left:16.0, right: 16.0),
+          padding: const EdgeInsets.only(top:20.0, left:16.0, right: 16.0),
           child: Container(
             child: Form(
               key: _formKey,
@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                     width: 80.0,
                     height: 80.0,
                   ),
-                  SizedBox(height: 50,),
+                  SizedBox(height: 20,),
                   TextFormField(
                     decoration: styleInputDecoration.copyWith(labelText: 'Email'),
                     keyboardType: TextInputType.emailAddress,
@@ -125,8 +125,7 @@ class LoginScreen extends StatelessWidget {
                     onClick: (){
                       print(_email);
                       if(_formKey.currentState.validate()){
-                        FirebaseAuthService.firebaseSignIn(_email, _password);
-                        Navigator.pushReplacementNamed(context, '/home');
+                        FirebaseAuthService().firebaseSignIn(context, _email, _password);
                       }
                     }
                   ),
@@ -153,7 +152,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, '/register');
+                      Navigator.pushNamed(context, '/register');
                     },
                   ),
                   SizedBox(height: 20,),

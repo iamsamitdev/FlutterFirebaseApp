@@ -22,7 +22,7 @@ class Routes {
       case routeRegister:
         return PageTransition(
           child: RegisterScreen(), 
-          type: PageTransitionType.leftToRight
+          type: PageTransitionType.rightToLeft
         );
         break;
       case routeHome:
