@@ -1,6 +1,5 @@
 import 'package:firebaseApp/res/style.dart';
 import 'package:firebaseApp/service/firebase/firebase_auth_service.dart';
-import 'package:firebaseApp/widget/bottom_sheet_widget.dart';
 import 'package:firebaseApp/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

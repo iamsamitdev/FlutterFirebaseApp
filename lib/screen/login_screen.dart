@@ -59,7 +59,9 @@ class LoginScreen extends StatelessWidget {
         ),
         margin: EdgeInsets.only(top: 12),
         padding: EdgeInsets.all(12)),
-        onTap: () {}
+        onTap: () async {
+          await FirebaseAuthService().signInWithGoogle(context);
+        }
     );
   }
 
@@ -77,7 +79,9 @@ class LoginScreen extends StatelessWidget {
         margin: EdgeInsets.only(top: 12),
         padding: EdgeInsets.all(12)
         ),
-        onTap: (){}
+        onTap: () async {
+          await FirebaseAuthService().signInWithFacebook(context);
+        }
       );
   }
 
