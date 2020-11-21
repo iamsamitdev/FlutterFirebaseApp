@@ -59,7 +59,9 @@ class LoginScreen extends StatelessWidget {
         ),
         margin: EdgeInsets.only(top: 12),
         padding: EdgeInsets.all(12)),
-        onTap: () {}
+        onTap: () async {
+          FirebaseAuthService().signInWithGoogle(context);
+        }
     );
   }
 
@@ -77,7 +79,9 @@ class LoginScreen extends StatelessWidget {
         margin: EdgeInsets.only(top: 12),
         padding: EdgeInsets.all(12)
         ),
-        onTap: (){}
+        onTap: () async {
+          FirebaseAuthService().signInWithFacebook(context);
+        }
       );
   }
 
@@ -125,8 +129,7 @@ class LoginScreen extends StatelessWidget {
                     onClick: (){
                       print(_email);
                       if(_formKey.currentState.validate()){
-                        FirebaseAuthService.firebaseSignIn(_email, _password);
-                        Navigator.pushReplacementNamed(context, '/home');
+                        FirebaseAuthService().firebaseSignIn(context, _email, _password);
                       }
                     }
                   ),

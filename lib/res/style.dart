@@ -18,6 +18,12 @@ final TextStyle styleTextFieldText = GoogleFonts.kanit(
   color: colorBlack,
 );
 
+final TextStyle styleTextFieldPhone = GoogleFonts.kanit(
+  fontSize: 24,
+  fontWeight: FontWeight.w500,
+  color: colorBlack,
+);
+
 final TextStyle styleSmallText = GoogleFonts.kanit(
   fontSize: 16,
   fontWeight: FontWeight.normal,

@@ -63,10 +63,8 @@ class RegisterScreen extends StatelessWidget {
                   ButtonWidget(
                     buttonText: 'สมัครสมาชิก', 
                     onClick: (){
-                      // print(_email);
                       if(_formKey.currentState.validate()){
-                        FirebaseAuthService.firebaseRegister(_email, _password);
-                        Navigator.pushReplacementNamed(context, '/login');
+                        FirebaseAuthService().firebaseRegister(context, _email, _password);
                       }
                     }
                   ),
